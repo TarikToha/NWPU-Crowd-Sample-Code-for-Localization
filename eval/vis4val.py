@@ -16,7 +16,7 @@ pred_file = 'Raz_loc_val_0.5.txt'
 
 
 
-img_path = ori_data = '/media/D/DataSet/NWPU-ori/images'
+img_path = ori_data = 'D:/odrive/grad/traffic_signal/data/NWPU-Crowd/images'
 
 flagError = False
 id_std = [i for i in range(3110,3610,1)]

@@ -1,16 +1,16 @@
-%%
+%
 clc; clear all;
 init_maxSize = [2048,2048];
 minSize = [576,768];
 
-path ='path to the data path';
-output_path = strcat('../NWPU-Crowd/min_', num2str(minSize(1)), 'x', num2str(minSize(2)), '_mod16_2048/');
+path ='D:/odrive/grad/traffic_signal/data/NWPU-Crowd';
+output_path = strcat('D:/dataset/NWPU-Crowd/min_', num2str(minSize(1)), 'x', num2str(minSize(2)), '_mod16_2048/');
 
-save_type = [1,0,1,0]; % img, density, dot, vis
+save_type = [1,1,1,1]; % img, density, dot, vis
 
 mkdir(output_path);
 
-path_img = strcat(output_path, '/img/'); mkdir(path_img);
+path_img = strcat(output_path, '/img/');mkdir(path_img);
 path_den = strcat(output_path, '/den/');mkdir(path_den);
 path_dot = strcat(output_path, '/dot/');mkdir(path_dot);
 path_vis = strcat(output_path, '/vis/');mkdir(path_vis);
@@ -26,7 +26,7 @@ for i_img = 1:size(img_list,1)
     im = imread(strcat(path, '/images/', img_name));
     [h, w, c] = size(im);
 
-    %% resize and save img
+    % resize and save img
     rate = init_maxSize(1)/h;
     rate_w = w*rate;
     if rate_w>init_maxSize(2)
@@ -57,7 +57,7 @@ for i_img = 1:size(img_list,1)
         continue;
     end
     
-    %% load mat 
+    % load mat 
     load(strcat(path, '/mats/',mat_name));
     
     if ~isempty(annPoints)
@@ -75,22 +75,22 @@ for i_img = 1:size(img_list,1)
 
         annPoints = annPoints(logical(check_list),:);
     end
-    %% gen & save labels
+    % gen & save labels
     if save_type(2) == 1
-        %% density generation   
+        % density generation   
         im_density = get_density_map_gaussian(im,annPoints,15,4); 
         csvwrite(strcat(path_den, name_split{1}, '.csv'), im_density);       
     end
 
     if save_type(3) ==1
-        %% dot generation
+        % dot generation
         im_dots = get_dot_map(im,annPoints);
         im_dots = uint8(im_dots);
         imwrite(im_dots, strcat(path_dot, name_split{1}, '.png'));
     end
     
     if save_type(4) == 1
-        %% visualization 
+        % visualization 
         if ~isempty(annPoints)
             imRGB = insertShape(im,'FilledCircle',[annPoints(:,1),annPoints(:,2),5*ones(size(annPoints(:,1)))],'Color', {'red'});
         else
@@ -98,5 +98,5 @@ for i_img = 1:size(img_list,1)
         end
         imwrite(imRGB, strcat(path_vis, name_split{1}, '.jpg'));   
     end 
-        
+    disp(img_name)    
 end

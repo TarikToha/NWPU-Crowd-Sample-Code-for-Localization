@@ -18,7 +18,7 @@ def createTrainData(datasetname, Dataset, cfg_data):
         list_file = os.path.join(cfg_data.DATA_PATH, 'txt_list', train_list)
         train_path = cfg_data.DATA_PATH
     if datasetname == 'NWPU':
-        list_file = os.path.join(cfg_data.DATA_PATH, 'txt_list/train.txt')
+        list_file = os.path.join(cfg_data.DATA_PATH, 'train.txt')
         train_path = cfg_data.DATA_PATH
 
     # pdb.set_trace()
@@ -56,7 +56,7 @@ def createValData(datasetname, Dataset, cfg_data):
         list_file = os.path.join(cfg_data.DATA_PATH, '/txt_list/', test_list)
         val_path = cfg_data.DATA_PATH
     if datasetname == 'NWPU':
-        list_file = os.path.join(cfg_data.DATA_PATH, 'txt_list/val.txt')
+        list_file = os.path.join(cfg_data.DATA_PATH, 'val.txt')
         val_path = cfg_data.DATA_PATH        
     
     #main_transform = None#cfg_data['main_transform']

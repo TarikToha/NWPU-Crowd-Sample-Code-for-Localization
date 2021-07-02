@@ -8,11 +8,14 @@ import cv2
 from utils import hungarian,read_pred_and_gt,AverageMeter,AverageCategoryMeter
 
 gt_file = 'val_gt_loc.txt'
-pred_file = 'tiny_val_loc_0.8_0.3.txt'
+# gt_file = 'gt_out.txt'
+# pred_file = 'Raz_loc_val_0.5.txt'
+# pred_file = '../submmited_raz_loc_0.5-0512.txt'
+pred_file = '../LC_Net_out.txt'
 
 flagError = False
 id_std = [i for i in range(3110,3610,1)]
-id_std[59] = 3098
+# id_std[59] = 3098
 
 num_classes = 6
 
@@ -51,7 +54,9 @@ def main():
 
     pred_data, gt_data = read_pred_and_gt(pred_file,gt_file)
     for i_sample in id_std:
-        print(i_sample) 
+        if i_sample == 3169:
+            continue
+        print(i_sample)
         # init               
         gt_p,pred_p,fn_gt_index,tp_pred_index,fp_pred_index= [],[],[],[],[]
         tp_s,fp_s,fn_s,tp_l,fp_l,fn_l = [0,0,0,0,0,0]
