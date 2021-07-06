@@ -32,9 +32,9 @@ restore = standard_transforms.Compose([
 ])
 pil_to_tensor = standard_transforms.ToTensor()
 
-dataRoot = '/content/drive/MyDrive/traffic_signal/dataset/nwpu/min_576x768_mod16_2048'
-ori_data = '/content/drive/MyDrive/traffic_signal/data/NWPU-Crowd/images'  # get the original size
-model_path = 'exp/05-04_23-54_NWPU_LC_Net_1e-05/all_ep_572_bceloss_0.070930.pth'
+dataRoot = '../dataset/nwpu/min_576x768_mod16_2048'
+ori_data = '../dataset/nwpu/nwpu_val'  # get the original size
+model_path = 'exp/05-04_23-54_NWPU_LC_Net_1e-05/all_ep_708_bceloss_0.067309.pth'
 
 
 def main():
