@@ -34,8 +34,8 @@ pil_to_tensor = standard_transforms.ToTensor()
 
 dataRoot = '../dataset/nwpu/min_576x768_mod16_2048'
 ori_data = '../dataset/nwpu/nwpu_val'  # get the original size
-model_path = 'exp/05-04_23-54_NWPU_LC_Net_1e-05/all_ep_708_bceloss_0.067309.pth'
-
+model_path = 'exp/04-25_05-19_NWPU_RAZ_loc_1e-05/all_ep_125_bceloss_0.065320.pth'
+# model_path = 'exp/05-04_23-54_NWPU_LC_Net_1e-05/all_ep_875_bceloss_0.066730.pth
 
 def main():
     txtpath = os.path.join(dataRoot, 'val.txt')
@@ -45,7 +45,7 @@ def main():
 
 
 def test(file_list, model_path):
-    net = CrowdCounter(cfg.GPU_ID, 'LC_Net')
+    net = CrowdCounter(cfg.GPU_ID, 'RAZ_loc')
     net.cuda()
     net.load_state_dict(torch.load(model_path))
     net.eval()
@@ -53,7 +53,7 @@ def test(file_list, model_path):
     gts = []
     preds = []
 
-    record = open('LC_Net_out.txt', 'w+')
+    record = open('RAZ_loc_out.txt', 'w+')
     for infos in file_list:
         filename = infos.split()[0]
 

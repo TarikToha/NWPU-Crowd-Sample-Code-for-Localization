@@ -10,8 +10,8 @@ from utils import hungarian,read_pred_and_gt,AverageMeter,AverageCategoryMeter
 gt_file = 'val_gt_loc.txt'
 # gt_file = 'gt_out.txt'
 # pred_file = 'Raz_loc_val_0.5.txt'
-# pred_file = '../submmited_raz_loc_0.5-0512.txt'
-pred_file = '../LC_Net_out.txt'
+pred_file = '../RAZ_loc_out.txt'
+# pred_file = '../LC_Net_out.txt'
 
 flagError = False
 id_std = [i for i in range(3110,3610,1)]

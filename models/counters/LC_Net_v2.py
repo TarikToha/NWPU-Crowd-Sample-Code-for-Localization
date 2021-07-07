@@ -1,16 +1,14 @@
 from misc.utils import *
 
 
-class LC_Net(nn.Module):
+class LC_Net_v2(nn.Module):
     def __init__(self):
-        super(LC_Net, self).__init__()
+        super(LC_Net_v2, self).__init__()
 
         self.backbone = nn.Sequential(
-            Focus(3, 32, k=3),
-            Conv(32, 64, k=3, s=2),
-            C3H(64, 64, n=1, shortcut=True),
+            Focus(3, 64, k=3),
             Conv(64, 128, k=3, s=2),
-            C3H(128, 128, n=3, shortcut=True),
+            C3H(128, 128, n=1, shortcut=True),
             Conv(128, 256, k=3, s=2),
             C3H(256, 256, n=3, shortcut=True),
             C3H(256, 256, n=3, shortcut=False, d=2)
