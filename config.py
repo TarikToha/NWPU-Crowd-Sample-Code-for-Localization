@@ -16,9 +16,10 @@ __C.NET = 'LC_Net_v2'  # net selection: MCNN, AlexNet, VGG, VGG_DECODER, Res50, 
 __C.PRE_GCC = False  # use the pretrained model on GCC dataset
 __C.PRE_GCC_MODEL = 'path to model'  # path to model
 
-__C.RESUME = False  # contine training
+__C.RESUME = True  # contine training
 # __C.RESUME_PATH = './exp/04-25_05-19_NWPU_RAZ_loc_1e-05/latest_state.pth'  #
 # __C.RESUME_PATH = './exp/05-04_23-54_NWPU_LC_Net_1e-05/latest_state.pth'  #
+__C.RESUME_PATH = './exp/07-10_10-54_NWPU_LC_Net_v2_1e-05/latest_state.pth'  #
 
 __C.GPU_ID = [0]  # sigle gpu: [0], [1] ...; multi gpus: [0,1]
 
