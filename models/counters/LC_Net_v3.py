@@ -1,9 +1,9 @@
 from misc.utils import *
 
 
-class LC_Net_v2(nn.Module):
+class LC_Net_v3(nn.Module):
     def __init__(self):
-        super(LC_Net_v2, self).__init__()
+        super(LC_Net_v3, self).__init__()
 
         self.backbone = nn.Sequential(
             Conv(3, 32, k=3, s=1),
