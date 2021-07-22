@@ -11,15 +11,16 @@ __C.SEED = 3035  # random seed,  for reproduction
 __C.DATASET = 'NWPU'  # dataset selection: GCC, SHHA, SHHB, UCF50, QNRF, WE, Mall, UCSD
 
 # __C.NET = 'RAZ_loc'  # net selection: MCNN, AlexNet, VGG, VGG_DECODER, Res50, CSRNet, SANet
-__C.NET = 'LC_Net_v2'  # net selection: MCNN, AlexNet, VGG, VGG_DECODER, Res50, CSRNet, SANet
+__C.NET = 'LC_Net'  # net selection: MCNN, AlexNet, VGG, VGG_DECODER, Res50, CSRNet, SANet
+# __C.NET = 'LC_Net_v2'  # net selection: MCNN, AlexNet, VGG, VGG_DECODER, Res50, CSRNet, SANet
 
 __C.PRE_GCC = False  # use the pretrained model on GCC dataset
 __C.PRE_GCC_MODEL = 'path to model'  # path to model
 
 __C.RESUME = True  # contine training
 # __C.RESUME_PATH = './exp/04-25_05-19_NWPU_RAZ_loc_1e-05/latest_state.pth'  #
-# __C.RESUME_PATH = './exp/05-04_23-54_NWPU_LC_Net_1e-05/latest_state.pth'  #
-__C.RESUME_PATH = './exp/07-10_10-54_NWPU_LC_Net_v2_1e-05/latest_state.pth'  #
+__C.RESUME_PATH = './exp/05-04_23-54_NWPU_LC_Net_1e-05/latest_state.pth'  #
+# __C.RESUME_PATH = './exp/07-10_10-54_NWPU_LC_Net_v2_1e-05/latest_state.pth'  #
 
 __C.GPU_ID = [0]  # sigle gpu: [0], [1] ...; multi gpus: [0,1]
 

@@ -1,22 +1,10 @@
-from matplotlib import pyplot as plt
-
-import matplotlib
-import os
-import random
-import torch
-import torch.nn.functional as F
+from PIL import Image
 from torch.autograd import Variable
-import torchvision.transforms as standard_transforms
-import misc.transforms as own_transforms
-import pandas as pd
 
-from models.CC import CrowdCounter
+import misc.transforms as own_transforms
 from config import cfg
 from misc.utils import *
-import scipy.io as sio
-from PIL import Image, ImageOps
-
-import pdb
+from models.CC import CrowdCounter
 
 torch.cuda.set_device(0)
 torch.backends.cudnn.benchmark = True
@@ -32,10 +20,13 @@ restore = standard_transforms.Compose([
 ])
 pil_to_tensor = standard_transforms.ToTensor()
 
+model_name = 'LC_Net_v2'
 dataRoot = '../dataset/nwpu/min_576x768_mod16_2048'
 ori_data = '../dataset/nwpu/nwpu_val'  # get the original size
-model_path = 'exp/04-25_05-19_NWPU_RAZ_loc_1e-05/all_ep_125_bceloss_0.065320.pth'
-# model_path = 'exp/05-04_23-54_NWPU_LC_Net_1e-05/all_ep_875_bceloss_0.066730.pth
+# model_path = 'exp/04-25_05-19_NWPU_RAZ_loc_1e-05/all_ep_125_bceloss_0.065320.pth'
+# model_path = './exp/05-04_23-54_NWPU_LC_Net_1e-05/all_ep_875_bceloss_0.066730.pth'
+model_path = './exp/07-10_10-54_NWPU_LC_Net_v2_1e-05/all_ep_1670_bceloss_0.065363.pth'
+
 
 def main():
     txtpath = os.path.join(dataRoot, 'val.txt')
@@ -45,7 +36,7 @@ def main():
 
 
 def test(file_list, model_path):
-    net = CrowdCounter(cfg.GPU_ID, 'RAZ_loc')
+    net = CrowdCounter(cfg.GPU_ID, model_name)
     net.cuda()
     net.load_state_dict(torch.load(model_path))
     net.eval()
@@ -53,7 +44,7 @@ def test(file_list, model_path):
     gts = []
     preds = []
 
-    record = open('RAZ_loc_out.txt', 'w+')
+    record = open(model_name + '_out.txt', 'w+')
     for infos in file_list:
         filename = infos.split()[0]
 
