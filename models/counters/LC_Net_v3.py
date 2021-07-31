@@ -6,14 +6,13 @@ class LC_Net_v3(nn.Module):
         super(LC_Net_v3, self).__init__()
 
         self.backbone = nn.Sequential(
-            Conv(3, 32, k=3, s=1),
-            Conv(32, 64, k=3, s=2),
-            C3H(64, 64, n=1, shortcut=True),
+            Focus(3, 64, k=3),
             Conv(64, 128, k=3, s=2),
-            C3H(128, 128, n=3, shortcut=True),
+            C3H(128, 128, n=1, shortcut=True),
             Conv(128, 256, k=3, s=2),
             C3H(256, 256, n=3, shortcut=True),
-            C3H(256, 256, n=1, shortcut=False, d=2)
+            SPP(256, 256, k=(3, 7, 11)),
+            C3H(256, 256, n=3, shortcut=False, d=2)
         )
 
         self.head = nn.Sequential(
@@ -96,3 +95,17 @@ class Focus(nn.Module):
     def forward(self, x):  # x(b,c,w,h) -> y(b,4c,w/2,h/2)
         return self.conv(torch.cat([x[..., ::2, ::2], x[..., 1::2, ::2], x[..., ::2, 1::2], x[..., 1::2, 1::2]], 1))
         # return self.conv(self.contract(x))
+
+
+class SPP(nn.Module):
+    # Spatial pyramid pooling layer used in YOLOv3-SPP
+    def __init__(self, c1, c2, k=(5, 9, 13)):
+        super(SPP, self).__init__()
+        c_ = c1 // 2  # hidden channels
+        self.cv1 = Conv(c1, c_, 1, 1)
+        self.cv2 = Conv(c_ * (len(k) + 1), c2, 1, 1)
+        self.m = nn.ModuleList([nn.MaxPool2d(kernel_size=x, stride=1, padding=x // 2) for x in k])
+
+    def forward(self, x):
+        x = self.cv1(x)
+        return self.cv2(torch.cat([x] + [m(x) for m in self.m], 1))
